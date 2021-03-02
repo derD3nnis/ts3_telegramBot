@@ -7,16 +7,17 @@ import com.github.theholywaffle.teamspeak3.api.event.TS3EventType;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 
 public class Ts3BotClass {
+    Credentials credentials = new Credentials();
+
     public void initBot(){
         final TS3Config config = new TS3Config();
-        config.setHost("77.77.77.77");
+        config.setHost(credentials.ts3_server);
         config.setEnableCommunicationsLogging(true);
 
         final TS3Query query = new TS3Query(config);
         query.connect();
-
         final TS3Api api = query.getApi();
-        api.login("serveradmin", "serveradminpassword");
+        api.login(credentials.ts3_query_name, credentials.ts3_query_password);
         api.selectVirtualServerById(1);
         api.setNickname("PutPutBot");
         api.sendChannelMessage("PutPutBot is online!");
