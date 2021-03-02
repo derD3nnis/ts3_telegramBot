@@ -1,5 +1,26 @@
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Test");
+    public static void main(String[] args){
+
+        // Initialize Teamspeak Api Context
+        Ts3BotClass ts3Bot = new Ts3BotClass();
+        ts3Bot.initBot();
+
+
+        // Initialize Telegram Api Context
+
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi.registerBot(new TelegramBotClass());
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
+
 }
